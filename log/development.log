@@ -1067,3 +1067,84 @@ Migrating to CreateGroups (20221208022545)
   [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2022-12-08 02:31:12.897959"], ["updated_at", "2022-12-08 02:31:12.897959"]]
   [1m[36mTRANSACTION (66.1ms)[0m  [1m[36mcommit transaction[0m
   [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/groups" for 127.0.0.1 at 2022-12-08 05:37:28 +0300
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by GroupsController#create as */*
+  Parameters: {"name"=>"laptops", "description"=>"a list of curated laptops", "group"=>{"name"=>"laptops", "description"=>"a list of curated laptops"}}
+[31mUnpermitted parameter: :group. Context: { controller: GroupsController, action: create, request: #<ActionDispatch::Request:0x00007fef70e77e00>, params: {"name"=>"laptops", "description"=>"a list of curated laptops", "controller"=>"groups", "action"=>"create", "group"=>{"name"=>"laptops", "description"=>"a list of curated laptops"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/groups_controller.rb:20:in `create'
+  [1m[36mCategory Create (0.7ms)[0m  [1m[32mINSERT INTO "categories" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "laptops"], ["description", "a list of curated laptops"], ["created_at", "2022-12-08 02:37:29.033023"], ["updated_at", "2022-12-08 02:37:29.033023"]]
+  ↳ app/controllers/groups_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (96.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/groups_controller.rb:20:in `create'
+[active_model_serializers] Rendered CategorySerializer with ActiveModelSerializers::Adapter::Attributes (0.6ms)
+Completed 201 Created in 139ms (Views: 2.8ms | ActiveRecord: 99.2ms | Allocations: 15688)
+
+
+Started POST "/signup" for 127.0.0.1 at 2022-12-08 05:38:55 +0300
+Processing by UsersController#create as */*
+  Parameters: {"username"=>"mokua", "email"=>"m@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"username"=>"mokua", "email"=>"m@gmail.com"}}
+[31mUnpermitted parameter: :user. Context: { controller: UsersController, action: create, request: #<ActionDispatch::Request:0x00007fef5401a900>, params: {"username"=>"mokua", "email"=>"m@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "controller"=>"users", "action"=>"create", "user"=>{"username"=>"mokua", "email"=>"m@gmail.com"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:11:in `create'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "mokua"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:11:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "m@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:11:in `create'
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["username", "mokua"], ["email", "m@gmail.com"], ["password_digest", "[FILTERED]"], ["created_at", "2022-12-08 02:38:55.787772"], ["updated_at", "2022-12-08 02:38:55.787772"]]
+  ↳ app/controllers/users_controller.rb:11:in `create'
+  [1m[36mTRANSACTION (129.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:11:in `create'
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = ? AND "users"."id" != ? LIMIT ?[0m  [["username", "mokua"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:12:in `create'
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "m@gmail.com"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:12:in `create'
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (1.67ms)
+Completed 201 Created in 507ms (Views: 8.1ms | ActiveRecord: 131.5ms | Allocations: 6617)
+
+
+Started POST "/products" for 127.0.0.1 at 2022-12-08 05:42:41 +0300
+Processing by ProductsController#create as */*
+  Parameters: {"title"=>"Lenovo", "description"=>"very affordable laptop", "price"=>"230", "image_url"=>"hhshs", "quantity"=>"4", "category_id"=>"1", "product"=>{"title"=>"Lenovo", "description"=>"very affordable laptop", "price"=>"230", "image_url"=>"hhshs", "quantity"=>"4", "category_id"=>"1"}}
+[31mUnpermitted parameter: :product. Context: { controller: ProductsController, action: create, request: #<ActionDispatch::Request:0x00007fef6007ed18>, params: {"title"=>"Lenovo", "description"=>"very affordable laptop", "price"=>"230", "image_url"=>"hhshs", "quantity"=>"4", "category_id"=>"1", "controller"=>"products", "action"=>"create", "product"=>{"title"=>"Lenovo", "description"=>"very affordable laptop", "price"=>"230", "image_url"=>"hhshs", "quantity"=>"4", "category_id"=>"1"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/products_controller.rb:21:in `create'
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:21:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/products_controller.rb:21:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.16ms)
+Completed 422 Unprocessable Entity in 31ms (Views: 1.9ms | ActiveRecord: 0.7ms | Allocations: 5354)
+
+
+Started POST "/products" for 127.0.0.1 at 2022-12-08 05:43:03 +0300
+Processing by ProductsController#create as */*
+  Parameters: {"title"=>"Lenovo", "description"=>"very affordable laptop", "price"=>"230", "image_url"=>"hhshs", "quantity"=>"4", "group_id"=>"1", "product"=>{"title"=>"Lenovo", "description"=>"very affordable laptop", "price"=>"230", "image_url"=>"hhshs", "quantity"=>"4", "group_id"=>"1"}}
+[31mUnpermitted parameter: :product. Context: { controller: ProductsController, action: create, request: #<ActionDispatch::Request:0x00007fef680f1ba8>, params: {"title"=>"Lenovo", "description"=>"very affordable laptop", "price"=>"230", "image_url"=>"hhshs", "quantity"=>"4", "group_id"=>"1", "controller"=>"products", "action"=>"create", "product"=>{"title"=>"Lenovo", "description"=>"very affordable laptop", "price"=>"230", "image_url"=>"hhshs", "quantity"=>"4", "group_id"=>"1"}} }[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.44ms)
+Completed 422 Unprocessable Entity in 36ms (Views: 2.9ms | ActiveRecord: 4.2ms | Allocations: 16655)
+
+
+Started POST "/products" for 127.0.0.1 at 2022-12-08 05:43:53 +0300
+Processing by ProductsController#create as */*
+  Parameters: {"title"=>"Lenovo", "description"=>"very affordable laptop", "price"=>"230", "image_url"=>"hhshs", "quantity"=>"4", "group_id"=>"1", "product"=>{"title"=>"Lenovo", "description"=>"very affordable laptop", "price"=>"230", "image_url"=>"hhshs", "quantity"=>"4", "group_id"=>"1"}}
+[31mUnpermitted parameter: :product. Context: { controller: ProductsController, action: create, request: #<ActionDispatch::Request:0x00007fef74ae0978>, params: {"title"=>"Lenovo", "description"=>"very affordable laptop", "price"=>"230", "image_url"=>"hhshs", "quantity"=>"4", "group_id"=>"1", "controller"=>"products", "action"=>"create", "product"=>{"title"=>"Lenovo", "description"=>"very affordable laptop", "price"=>"230", "image_url"=>"hhshs", "quantity"=>"4", "group_id"=>"1"}} }[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.18ms)
+Completed 422 Unprocessable Entity in 17ms (Views: 2.4ms | ActiveRecord: 3.5ms | Allocations: 3676)
+
+
+Started POST "/products" for 127.0.0.1 at 2022-12-08 05:44:34 +0300
+Processing by ProductsController#create as */*
+  Parameters: {"title"=>"Lenovo", "description"=>"very affordable laptop", "price"=>"230", "image_url"=>"hhshs", "quantity"=>"4", "group_id"=>"1", "product"=>{"title"=>"Lenovo", "description"=>"very affordable laptop", "price"=>"230", "image_url"=>"hhshs", "quantity"=>"4", "group_id"=>"1"}}
+[31mUnpermitted parameter: :product. Context: { controller: ProductsController, action: create, request: #<ActionDispatch::Request:0x00007fef60168530>, params: {"title"=>"Lenovo", "description"=>"very affordable laptop", "price"=>"230", "image_url"=>"hhshs", "quantity"=>"4", "group_id"=>"1", "controller"=>"products", "action"=>"create", "product"=>{"title"=>"Lenovo", "description"=>"very affordable laptop", "price"=>"230", "image_url"=>"hhshs", "quantity"=>"4", "group_id"=>"1"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/products_controller.rb:21:in `create'
+  [1m[36mGroup Load (0.3ms)[0m  [1m[34mSELECT "groups".* FROM "groups" WHERE "groups"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:21:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/products_controller.rb:21:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.15ms)
+Completed 422 Unprocessable Entity in 26ms (Views: 1.1ms | ActiveRecord: 3.4ms | Allocations: 7329)
+
+

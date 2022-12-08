@@ -5,8 +5,8 @@ class ProductsController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid, with: :render_422
 
     # GET /products
-    def index 
-        products = Product.all 
+    def index
+        products = Product.all
         render json: products, status: :ok
     end
 
@@ -37,10 +37,10 @@ class ProductsController < ApplicationController
     end
 
     # Private methods
-    private 
+    private
 
     def product_params
-        params.permit(:title, :description, :price, :image_url, :quantity, :category_id)
+        params.permit(:title, :description, :price, :image_url, :quantity, :group_id)
     end
 
     def render_404
