@@ -10,8 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_03_103047) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_08_022545) do
   create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "groups", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.datetime "created_at", null: false
@@ -24,10 +31,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_03_103047) do
     t.integer "price"
     t.string "image_url"
     t.integer "quantity"
-    t.integer "category_id"
+    t.integer "group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_products_on_category_id"
+    t.index ["group_id"], name: "index_products_on_group_id"
   end
 
   create_table "reviews", force: :cascade do |t|

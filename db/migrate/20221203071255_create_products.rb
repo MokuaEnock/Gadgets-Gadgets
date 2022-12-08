@@ -6,7 +6,7 @@ class CreateProducts < ActiveRecord::Migration[7.0]
       t.integer :price
       t.string :image_url
       t.integer :quantity
-      t.belongs_to :category
+      t.belongs_to :group
 
       t.timestamps
     end
